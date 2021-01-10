@@ -1,0 +1,23 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    padding: 0;
+    margin: 0;
+    grid-template-rows: 100vh 100vh;
+    background-color: rgb(18,18,18);
+}
+
+#canvas_mainChart {
+    background-color: rgb(41, 41, 41);
+}
+
+.levelChart {
+   
+}
+
+.testCharts {
+    background-color: aqua;
+}s
