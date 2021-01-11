@@ -9,13 +9,12 @@ html, body {
 
 html {
     scroll-snap-type: y mandatory;
-    scroll-snap-points-y: repeat(100vh);
 }
 
 body {
     display: grid;
     overflow-y: scroll;
-    grid-template-rows: 100vh 100vh 100vh;
+    grid-template-rows: repeat(10, 100vh);
     grid-template-columns: 100vw;
     justify-content: center;
     align-content: center;
@@ -96,6 +95,53 @@ body {
     width: 96%;
     align-self: center;
     justify-self: center;
-    box-shadow: 0px 0px 16px 1px rgb(73, 73, 73);
+    box-shadow: 0px 0px 16px 1px rgb(141, 141, 141);
 }
+
+.radarCharts {
+    scroll-snap-align: start;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    width: 96%;
+    height: 96%;
+    align-self: center;
+    justify-self: center;
+    box-shadow: 0px 0px 16px 1px rgb(141, 141, 141); 
+    overflow-y: scroll;
 }
+
+.radar {
+    flex-basis: 45%;
+    height: 45%;
+    box-shadow: 0px 0px 16px 1px rgb(141, 141, 141);
+}
+
+.exam {
+    scroll-snap-align: start;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-self: center;
+    justify-self: center;
+    width: 96%;
+    height: 96%;
+    box-shadow: 0px 0px 16px 1px rgb(141, 141, 141);
+    font-size: smaller;
+    overflow-y: scroll;
+}
+
+.exam h1 {
+    flex-basis: 100%;
+    text-align: center;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.songData {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
