@@ -2,10 +2,20 @@ const mainCtx = document.getElementById("canvas_mainChart").getContext("2d")
 
 const links = {
     "Julia": "https://raw.githubusercontent.com/SupportiveRaven/OsuBiologyProject/master/Julia.json",
-    "Laura": "https://raw.githubusercontent.com/SupportiveRaven/OsuBiologyProject/master/Laura.json"
+    "Laura": "https://raw.githubusercontent.com/SupportiveRaven/OsuBiologyProject/master/Laura.json",
+    "Michal": "https://raw.githubusercontent.com/SupportiveRaven/OsuBiologyProject/master/Michal.json",
+    "Bartek": "https://raw.githubusercontent.com/SupportiveRaven/OsuBiologyProject/master/Bartek.json",
+    "Adam": "https://raw.githubusercontent.com/SupportiveRaven/OsuBiologyProject/master/Adam.json"
 }
 
 const DAYS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"]
+const COLORS = {
+    "Bartek": "rgb(255,0,255, 0.6)",
+    "Julia": "rgb(255, 105, 180, 0.6)",
+    "Adam": "rgb(141, 182, 0, 0.6)",
+    "Laura": "rgb(204,204,0, 0.6)",
+    "Michal": "rgb(3, 169, 244, 0.6)"
+}
 
 const data = {}
 const levels = {}
@@ -56,16 +66,37 @@ const drawLevelsChart = function () {
             datasets: [
                 {
                     label: "Julia",
-                    backgroundColor: "rgb(255, 99, 132)",
-                    borderColor: "rgb(255, 99, 132)",
+                    backgroundColor: COLORS["Julia"],
+                    borderColor: COLORS["Julia"],
                     data: levels["Julia"],
                     fontColor: "white"
                 },
                 {
                     label: "Laura",
-                    backgroundColor: "rgb(255, 99, 132)",
-                    borderColor: "rgb(255, 99, 132)",
+                    backgroundColor: COLORS["Laura"],
+                    borderColor: COLORS["Laura"],
                     data: levels["Laura"],
+                    fontColor: "white"
+                },
+                {
+                    label: "Michal",
+                    backgroundColor: COLORS["Michal"],
+                    borderColor: COLORS["Michal"],
+                    data: levels["Michal"],
+                    fontColor: "white"
+                },
+                {
+                    label: "Bartek",
+                    backgroundColor: COLORS["Bartek"],
+                    borderColor: COLORS["Bartek"],
+                    data: levels["Bartek"],
+                    fontColor: "white"
+                },
+                {
+                    label: "Adam",
+                    backgroundColor: COLORS["Adam"],
+                    borderColor: COLORS["Adam"],
+                    data: levels["Adam"],
                     fontColor: "white"
                 }
             ]
@@ -83,7 +114,7 @@ const drawLevelsChart = function () {
                         ticks: {
                             fontColor: "white",
                             stepSize: 1
-                        }
+                        },
                     }
                 ],
                 xAxes: [
@@ -113,8 +144,17 @@ const drawLevelsChart = function () {
 const renderPage = async function() {
     data["Julia"] = await collectData(links["Julia"])
     data["Laura"] = await collectData(links["Laura"])
+    data["Bartek"] = await collectData(links["Bartek"])
+    data["Michal"] = await collectData(links["Michal"])
+    data["Adam"] = await collectData(links["Adam"])
+    
     levels["Julia"] = await getCurrentLevels(data["Julia"].days)
     levels["Laura"] = await getCurrentLevels(data["Laura"].days)
+    levels["Bartek"] = await getCurrentLevels(data["Bartek"].days)
+    levels["Michal"] = await getCurrentLevels(data["Michal"].days)
+    levels["Adam"] = await getCurrentLevels(data["Adam"].days)
+
+
     drawLevelsChart()
 
     

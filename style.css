@@ -2,12 +2,23 @@
     box-sizing: border-box;
 }
 
-body {
-    display: grid;
+html, body {
     padding: 0;
     margin: 0;
-    grid-template-rows: 100vh 100vh;
+}
+
+html {
+    scroll-snap-type: y mandatory;
+    scroll-snap-points-y: repeat(100vh);
+}
+
+body {
+    display: grid;
+    overflow-y: scroll;
+    grid-template-rows: 100vh 100vh 100vh;
+    grid-template-columns: 100vw;
     background-color: rgb(18,18,18);
+    overflow-x: hidden;
 }
 
 #canvas_mainChart {
@@ -15,9 +26,28 @@ body {
 }
 
 .levelChart {
-   
+    scroll-snap-align: center;
 }
 
-.testCharts {
-    background-color: aqua;
-}s
+.titlePage {
+    display: flex;
+    justify-content: center;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+}
+
+.titlePage h1{
+    color: rgb(184, 184, 184);
+    font-family: Helvetica;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    text-shadow: 5px 4px 5px #691496;
+    font-size: 4vh;
+    
+}
+
+.accuracyChart {
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+}
