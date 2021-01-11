@@ -1,5 +1,3 @@
-const mainCtx = document.getElementById("canvas_mainChart").getContext("2d")
-
 const links = {
     "Julia": "https://raw.githubusercontent.com/SupportiveRaven/OsuBiologyProject/master/Julia.json",
     "Laura": "https://raw.githubusercontent.com/SupportiveRaven/OsuBiologyProject/master/Laura.json",
@@ -19,6 +17,7 @@ const COLORS = {
 
 const data = {}
 const levels = {}
+const accuracies = {}
 
 const collectData = async function(link) {
     const response = await fetch(link)
@@ -55,7 +54,8 @@ const getCurrentLevels = async function(days) {
 
 const drawLevelsChart = function () {
     const ctx = document.getElementById("canvas_mainChart").getContext("2d");
-    Chart.defaults.global.elements.line.cubicInterpolationMode = "monotone"
+
+    //Chart.defaults.global.elements.line.cubicInterpolationMode = "monotone"
     Chart.defaults.global.elements.line.fill = "false"
 
     let chart = new Chart(ctx, {
@@ -69,35 +69,40 @@ const drawLevelsChart = function () {
                     backgroundColor: COLORS["Julia"],
                     borderColor: COLORS["Julia"],
                     data: levels["Julia"],
-                    fontColor: "white"
+                    fontColor: "white",
+                    lineTension: 0
                 },
                 {
                     label: "Laura",
                     backgroundColor: COLORS["Laura"],
                     borderColor: COLORS["Laura"],
                     data: levels["Laura"],
-                    fontColor: "white"
+                    fontColor: "white",
+                    lineTension: 0
                 },
                 {
                     label: "Michal",
                     backgroundColor: COLORS["Michal"],
                     borderColor: COLORS["Michal"],
                     data: levels["Michal"],
-                    fontColor: "white"
+                    fontColor: "white",
+                    lineTension: 0
                 },
                 {
                     label: "Bartek",
                     backgroundColor: COLORS["Bartek"],
                     borderColor: COLORS["Bartek"],
                     data: levels["Bartek"],
-                    fontColor: "white"
+                    fontColor: "white",
+                    lineTension: 0
                 },
                 {
                     label: "Adam",
                     backgroundColor: COLORS["Adam"],
                     borderColor: COLORS["Adam"],
                     data: levels["Adam"],
-                    fontColor: "white"
+                    fontColor: "white",
+                    lineTension: 0
                 }
             ]
         },
@@ -141,6 +146,132 @@ const drawLevelsChart = function () {
     })
 }
 
+const calculateDaysMeanAccuracy = async function (days, levels) {
+    const accTable = []
+
+    for (let i in days) {
+        currLevel = levels[i]
+        accModifier = currLevel * 100
+
+        let songIndexes = []
+
+        for (let i = 1; i <= 6; i++) {
+            songIndexes.push(currLevel.toString() + i.toString())
+        }
+
+        let accuracy = 0
+
+        for (let songKey of songIndexes) {
+            let tempAccuracy = 0
+            let song = days[i][songKey]
+
+            if (song == undefined) {
+                tempAccuracy += 0
+            }
+            else {
+                console.log(song)
+                for (let play of song) {
+                    tempAccuracy += Number(play["accuracy"])
+                }
+
+                tempAccuracy = tempAccuracy / song.length
+            }
+
+            accuracy += tempAccuracy
+        }
+        
+        accuracy = accuracy / 6
+        accuracy += accModifier
+        accTable.push(accuracy)
+        console.log(accTable, "acccc")
+    }
+
+    return accTable
+}
+
+const drawAccuracyChart = function() {
+    const ctx = document.getElementById("canvas_accuracyChart")
+
+    let chart = new Chart(ctx, {
+        type: "line",
+
+        data: {
+            labels: DAYS,
+            datasets: [
+                {
+                    label: "Julia",
+                    backgroundColor: COLORS["Julia"],
+                    borderColor: COLORS["Julia"],
+                    data: accuracies["Julia"],
+                    fontColor: "white",
+                    lineTension: 0
+                },
+                {
+                    label: "Laura",
+                    backgroundColor: COLORS["Laura"],
+                    borderColor: COLORS["Laura"],
+                    data: accuracies["Laura"],
+                    fontColor: "white",
+                    lineTension: 0
+                },
+                {
+                    label: "Michal",
+                    backgroundColor: COLORS["Michal"],
+                    borderColor: COLORS["Michal"],
+                    data: accuracies["Michal"],
+                    fontColor: "white",
+                    lineTension: 0
+                },
+                {
+                    label: "Adam",
+                    backgroundColor: COLORS["Adam"],
+                    borderColor: COLORS["Adam"],
+                    data: accuracies["Adam"],
+                    fontColor: "white",
+                    lineTension: 0
+                }
+            ]
+        },
+
+        options: {
+            scales: {
+                yAxes: [
+                    {
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Celność",
+                            fontColor: "white"
+                        },
+                        ticks: {
+                            fontColor: "white",
+                            //stepSize: 1
+                        },
+                    }
+                ],
+                xAxes: [
+                    {
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Dzień",
+                            fontColor: "white"
+                        },
+                        ticks: {
+                            fontColor: "white",
+                           // stepSize: 1
+                        }
+                    }
+                ]
+            },
+            legend: {
+                position: "top",
+                labels: {
+                    fontColor: "white"
+                }
+            }
+        }
+    })
+}
+
 const renderPage = async function() {
     data["Julia"] = await collectData(links["Julia"])
     data["Laura"] = await collectData(links["Laura"])
@@ -154,8 +285,13 @@ const renderPage = async function() {
     levels["Michal"] = await getCurrentLevels(data["Michal"].days)
     levels["Adam"] = await getCurrentLevels(data["Adam"].days)
 
+    accuracies["Julia"] = await calculateDaysMeanAccuracy(data["Julia"].days, levels["Julia"])
+    accuracies["Adam"] = await calculateDaysMeanAccuracy(data["Adam"].days, levels["Adam"])
+    accuracies["Michal"] = await calculateDaysMeanAccuracy(data["Michal"].days, levels["Michal"])
+    accuracies["Laura"] = await calculateDaysMeanAccuracy(data["Laura"].days, levels["Laura"])
 
     drawLevelsChart()
+    drawAccuracyChart()
 
     
 }

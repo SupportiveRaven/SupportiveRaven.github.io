@@ -17,37 +17,85 @@ body {
     overflow-y: scroll;
     grid-template-rows: 100vh 100vh 100vh;
     grid-template-columns: 100vw;
+    justify-content: center;
+    align-content: center;
     background-color: rgb(18,18,18);
     overflow-x: hidden;
 }
 
-#canvas_mainChart {
-    background-color: rgb(41, 41, 41);
-}
-
 .levelChart {
     scroll-snap-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 96%;
+    align-self: center;
+    justify-self: center;
+    box-shadow: 0px 0px 16px 1px rgb(73, 73, 73);
 }
 
 .titlePage {
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
     scroll-snap-align: center;
     scroll-snap-stop: always;
 }
 
+.title {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+    flex-direction: column;
+    flex-wrap: wrap;
+    color: white;
+    font-family: Helvetica;
+    text-shadow: 3px 3px 5px #691496
+}
+
+.title h3, h4 {
+    margin: 0;
+    text-align: center;
+}
+
 .titlePage h1{
-    color: rgb(184, 184, 184);
+    color: rgb(216, 216, 216);
     font-family: Helvetica;
     text-align: center;
     display: flex;
     justify-content: center;
     text-shadow: 5px 4px 5px #691496;
     font-size: 4vh;
-    
+}
+
+.authors {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 5px;
+    font-size: 2.5vh;
+    height: 50%;
+    align-self: center;
+    justify-self: center;
+}
+
+.author {
+    padding: 5px;
+    text-align: center;
 }
 
 .accuracyChart {
     scroll-snap-align: center;
-    scroll-snap-stop: always;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 96%;
+    align-self: center;
+    justify-self: center;
+    box-shadow: 0px 0px 16px 1px rgb(73, 73, 73);
+}
 }
