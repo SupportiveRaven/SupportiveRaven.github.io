@@ -1,0 +1,133 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background-image: URL("background.png");
+    background-size: cover;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+    overflow: hidden;
+}
+
+.loginPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60%;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+}
+
+.login {
+    justify-self: start;
+}
+
+.title h1 {
+    font-size: 4em;
+    color: #287233;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+
+}
+
+.login span {
+    text-align: center;
+    padding: 5px;
+}
+
+.login span:first-child {
+    font-size: x-large;
+    margin-bottom: 10px;
+    color: white;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+
+}
+
+.login span:last-child {
+    color: springgreen;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+}
+
+.dinosaurs {
+    display: flex;
+    flex-wrap: wrap;
+    height: 80%;
+}
+
+.dino {
+    flex-basis: 20%;
+    height: 40%;
+    transition-duration: 1.2s;
+}
+
+.dino img {
+    max-width: 100%;
+    height: 100%;
+    border-radius: 80px;
+    transform-origin: center;
+}
+
+.dino:hover {
+    transform-origin:  center;
+    transform: rotate(360deg) scale(1.2);
+}
+
+
+.dinoText {
+    text-align: center;
+    font-size: 2em;
+    align-self: center;
+    justify-self: flex-end;
+    color: #41cc56;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+}
+
+.text {
+    text-align: center;
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    font-size: 1.5em;
+    color: white;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+}
+
+.logout {
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+    z-index: 10;
+}
+
+.system {
+    align-self: center;
+    justify-self: center;
+    display: flex;
+    justify-content: center;
+}
+
+.system p {
+    margin-top: 10%;
+    width: 60%;
+    text-align: center;
+    text-justify: auto;
+    color: #a7a7a7;
+    font-size: larger;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+    margin: 0;
+    padding: 5px;
+}
